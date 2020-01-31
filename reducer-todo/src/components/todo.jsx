@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 
 const Todo = ({ todo, dispatch }) => {
 	const toggleCompleted = () => {
@@ -7,11 +7,24 @@ const Todo = ({ todo, dispatch }) => {
 
 	return (
 		<div
+			style={{ display: 'flex', justifyContent: 'center', cursor: 'pointer' }}
 			onClick={toggleCompleted}
 			className={`todo$(todo.completed ? 'completed)' : ''`}
-			style={{ cursor: 'pointer', textDecoration: todo.completed ? 'line-through' : '' }}
 		>
-			<p>{todo.item}</p>
+			{todo.completed ? (
+				<Fragment>
+					<p
+						style={{
+							textDecoration: todo.completed ? 'line-through' : ''
+						}}
+					>
+						{todo.item}
+					</p>
+					<p> --> Completed: {todo.timeCompleted}</p>
+				</Fragment>
+			) : (
+				<p>{todo.item}</p>
+			)}
 		</div>
 	);
 };
